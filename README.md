@@ -2,11 +2,9 @@
 
 ###### From 20/07/2020
 
-###### Yêu cầu:
+**Mục lục: **
 
-* Cài extendsion cho visual code để format file .md: vscode-md
+1. Basic
 
-###### Format cho các bài gồm :
-
-1. File md trình bày
-2. Code mẫu
+* Javascript là gì ?
+* Kiểu dữ liệu
