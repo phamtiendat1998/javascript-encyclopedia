@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Capture In Add Event Listener</title>
+    <style>
+        .center {
+            width: 150px;
+            height: 150px;
+            border: 1px solid black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .center:hover {
+            background-color: burlywood;
+        }
+
+        .center>div {
+            width: 100px;
+            height: 100px;
+        }
+
+        .center>div:hover {
+            background-color: cyan;
+        }
+
+        .option {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="option">
+        <p> <b>Reset(f5) lại trang trước khi thay đổi option</b></p>
+        <!-- Case 1 -->
+        <input type="checkbox" name="bothFalseCheckbox" id="bothFalseCheckbox">
+        <label for="bothFalseCheckbox"><b>Cả 2 event đều set useCapture là false</b></label>
+        <p> - Khi đó event sẽ được đăng kí và thực hiện từ phía trong ra ngoài</p>
+        <!-- Case 2 -->
+        <input type="checkbox" name="outTrueInFalseCheckbox" id="outTrueInFalseCheckbox">
+        <label for="outTrueInFalseCheckbox"><b>OutDiv là true, InDiv là false </b></label>
+        <p> - Khi đó event sẽ được đăng kí và thực hiện: Out - có useCapture là true > In - có useCapture là false</p>
+        <!-- Case 3 -->
+        <input type="checkbox" name="outFalseInTrueCheckbox" id="outFalseInTrueCheckbox">
+        <label for="outFalseInTrueCheckbox"><b>OutDiv là false, InDiv là true </b></label>
+        <p> - Khi đó event sẽ được đăng kí và thực hiện: In - có useCapture là true > Out - có useCapture là false</p>
+        <!-- Case 4 -->
+        <input type="checkbox" name="bothTrueCheckbox" id="bothTrueCheckbox">
+        <label for="bothTrueCheckbox"><b>Cả 2 event đều set useCapture là true </b></label>
+        <p> - Khi đó event sẽ được đăng kí và thực hiện từ phía ngoài vào trong</p>
+    </div>
+    <div class="center" id="outDiv">
+        Out
+        <div class="center" id="inDiv">
+            In
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        const outDiv = document.getElementById("outDiv");
+        const inDiv = document.getElementById("inDiv");
+        const bothFalseCheckbox = document.getElementById("bothFalseCheckbox");
+        const outTrueInFalseCheckbox = document.getElementById("outTrueInFalseCheckbox");
+        const outFalseInTrueCheckbox = document.getElementById("outFalseInTrueCheckbox");
+        const bothTrueCheckbox = document.getElementById("bothTrueCheckbox");
+
+        bothFalseCheckbox.addEventListener("change", caseBothFalse, false);
+        outTrueInFalseCheckbox.addEventListener("change", caseOutTrueInFalse, false);
+        outFalseInTrueCheckbox.addEventListener("change", caseOutFalseInTrue, false);
+        bothTrueCheckbox.addEventListener("change", caseOutFalseInTrue, false);
+
+
+        // Case 1: Both userCapture is false
+        function caseBothFalse() {
+            outDiv.addEventListener('click', function () { alert("Div Out") }, false);
+            inDiv.addEventListener('click', function () { alert("Div In") }, false);
+        }
+
+        // Case 2: userCapture: out is true, in is false
+        function caseOutTrueInFalse() {
+            outDiv.addEventListener('click', function () { alert("Div Out") }, true);
+            inDiv.addEventListener('click', function () { alert("Div In") }, false);
+        }
+
+        // Case 3: userCapture: out is false, in is true
+        function caseOutFalseInTrue() {
+            outDiv.addEventListener('click', function () { alert("Div Out") }, false);
+            inDiv.addEventListener('click', function () { alert("Div In") }, true);
+        }
+
+        // Case 4: Both userCapture is true
+        function caseOutFalseInTrue() {
+            outDiv.addEventListener('click', function () { alert("Div Out") }, true);
+            inDiv.addEventListener('click', function () { alert("Div In") }, true);
+        }
+
+    </script>
+</body>
+
+</html>
