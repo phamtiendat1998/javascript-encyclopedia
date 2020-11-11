@@ -28,3 +28,5 @@ alert( "not a number" / 2 + 5 ); // NaN
 ```
 
 Tham khảo :
+https://developer.mozilla.org/vi/docs/Web/JavaScript/Data_structures
+https://javascript.info/number
