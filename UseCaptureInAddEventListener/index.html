@@ -69,6 +69,9 @@
 
     <!-- Script -->
     <script>
+        // Có 2 khái niệm là capture pharse và bubbling pharse
+        // Khi set userCapture = true, ta sẽ có capture pharse là event sẽ đi từ cha vào con
+        // Khi set userCapture = false, ta sẽ có bubbling pharse là event sẽ đi từ con ra cha
         const outDiv = document.getElementById("outDiv");
         const inDiv = document.getElementById("inDiv");
         const bothFalseCheckbox = document.getElementById("bothFalseCheckbox");
